@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ApiRestService} from '../../services/api-rest.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  constructor(public instService: ApiRestService) {
+    this.consumeService();
+  }// constructor
 
   ngOnInit() {
-  }
+  }// ngOnInit
 
-}
+  consumeService(){
+     this.instService.getCurrency().subscribe(data => {
+     console.log("monedas",data.rates['USD']);
+     
+    });
+    
+  }// consumeService
+
+}// LandingComponent
